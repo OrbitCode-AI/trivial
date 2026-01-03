@@ -1,8 +1,14 @@
 import { useState } from 'react';
 import './TodoList.css';
 
+interface Todo {
+  id: number;
+  text: string;
+  completed: boolean;
+}
+
 export default function TodoList() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState<Todo[]>([]);
   const [input, setInput] = useState('');
 
   const addTodo = () => {
@@ -12,13 +18,13 @@ export default function TodoList() {
     }
   };
 
-  const toggleTodo = (id) => {
+  const toggleTodo = (id: number) => {
     setTodos(todos.map(todo =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     ));
   };
 
-  const deleteTodo = (id) => {
+  const deleteTodo = (id: number) => {
     setTodos(todos.filter(t => t.id !== id));
   };
 
@@ -35,7 +41,7 @@ export default function TodoList() {
         <input
           type="text"
           value={input}
-          onInput={(e) => setInput(e.target.value)}
+          onInput={(e) => setInput((e.target as HTMLInputElement).value)}
           onKeyPress={(e) => e.key === 'Enter' && addTodo()}
           placeholder="Add a new todo..."
           className="todo-input"

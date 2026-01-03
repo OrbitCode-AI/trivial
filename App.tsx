@@ -16,7 +16,7 @@ export default function App() {
           <input
             type="text"
             value={name}
-            onInput={(e) => setName(e.target.value)}
+            onInput={(e) => setName((e.target as HTMLInputElement).value)}
             placeholder="Enter your name"
             className="name-input"
           />
