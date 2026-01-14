@@ -7,13 +7,19 @@ interface Todo {
   completed: boolean;
 }
 
-// Declare the global db API (injected by platform)
-declare const db: {
+// Platform db API type (injected on window by platform)
+interface DbApi {
   get(store: string, key: string): Promise<any>;
   put(store: string, key: string, value: any): Promise<void>;
   getAll(store: string): Promise<Array<{ key: string; value: any }>>;
   delete(store: string, key: string): Promise<void>;
-};
+}
+
+declare global {
+  interface Window {
+    db?: DbApi;
+  }
+}
 
 const STORE = 'todos';
 
@@ -25,7 +31,7 @@ export default function TodoList() {
   // Wait for db to be ready, then load todos
   useEffect(() => {
     const loadTodos = async () => {
-      const entries = await db.getAll(STORE);
+      const entries = await window.db!.getAll(STORE);
       setTodos(entries.map(e => e.value));
     };
 
@@ -35,7 +41,7 @@ export default function TodoList() {
     };
 
     // Check if db is already available
-    if (typeof db !== 'undefined') {
+    if (window.db) {
       onReady();
     } else {
       window.addEventListener('dbready', onReady);
@@ -52,7 +58,7 @@ export default function TodoList() {
       completed: false
     };
 
-    await db.put(STORE, todo.id, todo);
+    await window.db!.put(STORE, todo.id, todo);
     setTodos([...todos, todo]);
     setInput('');
   };
@@ -62,12 +68,12 @@ export default function TodoList() {
     if (!todo) return;
 
     const updated = { ...todo, completed: !todo.completed };
-    await db.put(STORE, id, updated);
+    await window.db!.put(STORE, id, updated);
     setTodos(todos.map(t => t.id === id ? updated : t));
   };
 
   const deleteTodo = async (id: string) => {
-    await db.delete(STORE, id);
+    await window.db!.delete(STORE, id);
     setTodos(todos.filter(t => t.id !== id));
   };
 
