@@ -35,8 +35,10 @@ export default function TodoList() {
   useEffect(() => {
     const loadTodos = async () => {
       const entries = await window.db!.getAll(STORE);
-      // Reconstruct TodoWithId from key + value
-      setTodos(entries.map(e => ({ id: e.key, ...e.value })));
+      // Reconstruct TodoWithId from key + value, sort by numeric id
+      const loaded = entries.map(e => ({ id: e.key, ...e.value }));
+      loaded.sort((a, b) => parseInt(a.id, 10) - parseInt(b.id, 10));
+      setTodos(loaded);
     };
 
     const onReady = () => {
@@ -56,7 +58,12 @@ export default function TodoList() {
   const addTodo = async () => {
     if (!input.trim() || !ready) return;
 
-    const id = crypto.randomUUID();
+    // Auto-increment: find max numeric id and add 1
+    const maxId = todos.reduce((max, t) => {
+      const num = parseInt(t.id, 10);
+      return !isNaN(num) && num > max ? num : max;
+    }, 0);
+    const id = String(maxId + 1);
     const todo: Todo = { text: input, completed: false };
 
     await window.db!.put(STORE, id, todo);
