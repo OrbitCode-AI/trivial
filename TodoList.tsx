@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useCollection } from 'orbit';
+import { useSet } from 'orbit';
 import './TodoList.css';
 
 interface Todo {
@@ -8,7 +8,7 @@ interface Todo {
 }
 
 export default function TodoList() {
-  const [todos, { add, update, remove }, loading] = useCollection<Todo>('todos');
+  const [todos, { add, update, remove }, loading] = useSet<Todo>('todos');
   const [input, setInput] = useState('');
 
   const addTodo = async () => {
