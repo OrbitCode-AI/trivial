@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useVar } from 'orbit';
 import Counter from './Counter';
 import TodoList from './TodoList';
 import './App.css';
 
 export default function App() {
-  const [name, setName] = useState('World');
+  const [name, setName] = useVar('name', 'World');
 
   return (
     <div className="app-background">
