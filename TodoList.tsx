@@ -1,16 +1,6 @@
 import { useState } from 'react';
+import { useCollection } from 'orbit';
 import './TodoList.css';
-
-// Platform hook type (injected on window by platform)
-declare global {
-  interface Window {
-    useCollection<T>(store: string): [
-      Array<T & { id: string }>,
-      { add: (item: T) => Promise<string>; update: (id: string, item: T) => Promise<void>; remove: (id: string) => Promise<void> },
-      boolean
-    ];
-  }
-}
 
 interface Todo {
   text: string;
@@ -18,7 +8,7 @@ interface Todo {
 }
 
 export default function TodoList() {
-  const [todos, { add, update, remove }, loading] = window.useCollection<Todo>('todos');
+  const [todos, { add, update, remove }, loading] = useCollection<Todo>('todos');
   const [input, setInput] = useState('');
 
   const addTodo = async () => {
