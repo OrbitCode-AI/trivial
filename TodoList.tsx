@@ -1,30 +1,73 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './TodoList.css';
 
 interface Todo {
-  id: number;
+  id: string;
   text: string;
   completed: boolean;
 }
 
+// Declare the global db API (injected by platform)
+declare const db: {
+  get(store: string, key: string): Promise<any>;
+  put(store: string, key: string, value: any): Promise<void>;
+  getAll(store: string): Promise<Array<{ key: string; value: any }>>;
+  delete(store: string, key: string): Promise<void>;
+};
+
+const STORE = 'todos';
+
 export default function TodoList() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [input, setInput] = useState('');
+  const [ready, setReady] = useState(false);
 
-  const addTodo = () => {
-    if (input.trim()) {
-      setTodos([...todos, { id: Date.now(), text: input, completed: false }]);
-      setInput('');
+  // Wait for db to be ready, then load todos
+  useEffect(() => {
+    const loadTodos = async () => {
+      const entries = await db.getAll(STORE);
+      setTodos(entries.map(e => e.value));
+    };
+
+    const onReady = () => {
+      setReady(true);
+      loadTodos();
+    };
+
+    // Check if db is already available
+    if (typeof db !== 'undefined') {
+      onReady();
+    } else {
+      window.addEventListener('dbready', onReady);
+      return () => window.removeEventListener('dbready', onReady);
     }
+  }, []);
+
+  const addTodo = async () => {
+    if (!input.trim() || !ready) return;
+
+    const todo: Todo = {
+      id: crypto.randomUUID(),
+      text: input,
+      completed: false
+    };
+
+    await db.put(STORE, todo.id, todo);
+    setTodos([...todos, todo]);
+    setInput('');
   };
 
-  const toggleTodo = (id: number) => {
-    setTodos(todos.map(todo =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ));
+  const toggleTodo = async (id: string) => {
+    const todo = todos.find(t => t.id === id);
+    if (!todo) return;
+
+    const updated = { ...todo, completed: !todo.completed };
+    await db.put(STORE, id, updated);
+    setTodos(todos.map(t => t.id === id ? updated : t));
   };
 
-  const deleteTodo = (id: number) => {
+  const deleteTodo = async (id: string) => {
+    await db.delete(STORE, id);
     setTodos(todos.filter(t => t.id !== id));
   };
 
@@ -45,8 +88,9 @@ export default function TodoList() {
           onKeyPress={(e) => e.key === 'Enter' && addTodo()}
           placeholder="Add a new todo..."
           className="todo-input"
+          disabled={!ready}
         />
-        <button className="todo-add-btn" onClick={addTodo}>
+        <button className="todo-add-btn" onClick={addTodo} disabled={!ready}>
           Add
         </button>
       </div>
@@ -72,7 +116,7 @@ export default function TodoList() {
         ))}
         {todos.length === 0 && (
           <li className="todo-empty">
-            No todos yet. Add one above to get started!
+            {ready ? "No todos yet. Add one above to get started!" : "Loading..."}
           </li>
         )}
       </ul>
