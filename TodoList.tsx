@@ -2,9 +2,12 @@ import { useState, useEffect } from 'react';
 import './TodoList.css';
 
 interface Todo {
-  id: string;
   text: string;
   completed: boolean;
+}
+
+interface TodoWithId extends Todo {
+  id: string;
 }
 
 // Platform db API type (injected on window by platform)
@@ -24,7 +27,7 @@ declare global {
 const STORE = 'todos';
 
 export default function TodoList() {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<TodoWithId[]>([]);
   const [input, setInput] = useState('');
   const [ready, setReady] = useState(false);
 
@@ -32,7 +35,8 @@ export default function TodoList() {
   useEffect(() => {
     const loadTodos = async () => {
       const entries = await window.db!.getAll(STORE);
-      setTodos(entries.map(e => e.value));
+      // Reconstruct TodoWithId from key + value
+      setTodos(entries.map(e => ({ id: e.key, ...e.value })));
     };
 
     const onReady = () => {
@@ -52,14 +56,11 @@ export default function TodoList() {
   const addTodo = async () => {
     if (!input.trim() || !ready) return;
 
-    const todo: Todo = {
-      id: crypto.randomUUID(),
-      text: input,
-      completed: false
-    };
+    const id = crypto.randomUUID();
+    const todo: Todo = { text: input, completed: false };
 
-    await window.db!.put(STORE, todo.id, todo);
-    setTodos([...todos, todo]);
+    await window.db!.put(STORE, id, todo);
+    setTodos([...todos, { id, ...todo }]);
     setInput('');
   };
 
@@ -67,9 +68,9 @@ export default function TodoList() {
     const todo = todos.find(t => t.id === id);
     if (!todo) return;
 
-    const updated = { ...todo, completed: !todo.completed };
+    const updated: Todo = { text: todo.text, completed: !todo.completed };
     await window.db!.put(STORE, id, updated);
-    setTodos(todos.map(t => t.id === id ? updated : t));
+    setTodos(todos.map(t => t.id === id ? { id, ...updated } : t));
   };
 
   const deleteTodo = async (id: string) => {
