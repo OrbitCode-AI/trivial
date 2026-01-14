@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useVar } from 'orbit';
 import './Counter.css';
 
 export default function Counter() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useVar('counter', 0);
 
   return (
     <div className="counter-container">
