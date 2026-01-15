@@ -1,4 +1,4 @@
-import { useVar } from 'orbit';
+import { useVar } from 'orbitcode';
 import './Counter.css';
 
 export default function Counter() {
