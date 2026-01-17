@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useSet } from 'orbitcode';
+import { useVar, useSet } from 'orbitcode';
 import './TodoList.css';
 
 interface Todo {
@@ -9,7 +8,7 @@ interface Todo {
 
 export default function TodoList() {
   const [todos, { add, update, remove }, loading] = useSet<Todo>('todos');
-  const [input, setInput] = useState('');
+  const [input, setInput] = useVar('todoInput', '');
 
   const addTodo = async () => {
     if (!input.trim()) return;
