@@ -27,8 +27,8 @@ export default function App() {
 
         <div className="info-box">
           <p className="info-text">
-            💡 <strong>Multi-file editing!</strong> Counter and TodoList are
-            in separate files. Check the file tree on the left to see all files.
+            💡 <strong>Multi-file editing!</strong> Counter and TodoList are in separate files.
+            Check the file tree on the left to see all files.
           </p>
         </div>
       </div>

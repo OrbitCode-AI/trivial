@@ -11,10 +11,10 @@ export default function Counter() {
         Counter
       </h2>
       <div className="counter-buttons">
-        <button className="counter-btn-primary" onClick={() => setCount(c => c + 1)}>
+        <button className="counter-btn-primary" onClick={() => setCount((c) => c + 1)}>
           + Increment
         </button>
-        <button className="counter-btn-outline" onClick={() => setCount(c => c - 1)}>
+        <button className="counter-btn-outline" onClick={() => setCount((c) => c - 1)}>
           − Decrement
         </button>
         <button className="counter-btn-subtle" onClick={() => setCount(0)}>

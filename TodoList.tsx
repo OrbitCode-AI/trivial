@@ -20,10 +20,14 @@ export default function TodoList() {
     update(todo.id, { text: todo.text, completed: !todo.completed });
   };
 
-  const activeTodos = todos.filter(t => !t.completed).length;
+  const activeTodos = todos.filter((t) => !t.completed).length;
 
   if (loading) {
-    return <div className="todo-container"><p>Loading...</p></div>;
+    return (
+      <div className="todo-container">
+        <p>Loading...</p>
+      </div>
+    );
   }
 
   return (
@@ -48,7 +52,7 @@ export default function TodoList() {
       </div>
 
       <ul className="todo-list">
-        {todos.map(todo => (
+        {todos.map((todo) => (
           <li key={todo.id} className={`todo-item ${todo.completed ? 'completed' : ''}`}>
             <label className="todo-label">
               <input
@@ -57,9 +61,7 @@ export default function TodoList() {
                 onChange={() => toggleTodo(todo)}
                 className="todo-checkbox"
               />
-              <span className={`todo-text ${todo.completed ? 'completed' : ''}`}>
-                {todo.text}
-              </span>
+              <span className={`todo-text ${todo.completed ? 'completed' : ''}`}>{todo.text}</span>
             </label>
             <button className="todo-delete-btn" onClick={() => remove(todo.id)}>
               ×
@@ -67,9 +69,7 @@ export default function TodoList() {
           </li>
         ))}
         {todos.length === 0 && (
-          <li className="todo-empty">
-            No todos yet. Add one above to get started!
-          </li>
+          <li className="todo-empty">No todos yet. Add one above to get started!</li>
         )}
       </ul>
     </div>
