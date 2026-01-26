@@ -1,8 +1,8 @@
-import { useVar } from 'orbitcode';
-import './Counter.css';
+import { useVar } from 'orbitcode'
+import './Counter.css'
 
 export default function Counter() {
-  const [count, setCount] = useVar('counter', 0);
+  const [count, setCount] = useVar('counter', 0)
 
   return (
     <div className="counter-container">
@@ -11,16 +11,16 @@ export default function Counter() {
         Counter
       </h2>
       <div className="counter-buttons">
-        <button className="counter-btn-primary" onClick={() => setCount((c) => c + 1)}>
+        <button type="button" className="counter-btn-primary" onClick={() => setCount(c => c + 1)}>
           + Increment
         </button>
-        <button className="counter-btn-outline" onClick={() => setCount((c) => c - 1)}>
+        <button type="button" className="counter-btn-outline" onClick={() => setCount(c => c - 1)}>
           − Decrement
         </button>
-        <button className="counter-btn-subtle" onClick={() => setCount(0)}>
+        <button type="button" className="counter-btn-subtle" onClick={() => setCount(0)}>
           ↺ Reset
         </button>
       </div>
     </div>
-  );
+  )
 }

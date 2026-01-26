@@ -1,33 +1,33 @@
-import { useVar, useSet } from 'orbitcode';
-import './TodoList.css';
+import { useVar, useSet } from 'orbitcode'
+import './TodoList.css'
 
 interface Todo {
-  text: string;
-  completed: boolean;
+  text: string
+  completed: boolean
 }
 
 export default function TodoList() {
-  const [todos, { add, update, remove }, loading] = useSet<Todo>('todos');
-  const [input, setInput] = useVar('todoInput', '');
+  const [todos, { add, update, remove }, loading] = useSet<Todo>('todos')
+  const [input, setInput] = useVar('todoInput', '')
 
   const addTodo = async () => {
-    if (!input.trim()) return;
-    await add({ text: input, completed: false });
-    setInput('');
-  };
+    if (!input.trim()) return
+    await add({ text: input, completed: false })
+    setInput('')
+  }
 
   const toggleTodo = (todo: Todo & { id: string }) => {
-    update(todo.id, { text: todo.text, completed: !todo.completed });
-  };
+    update(todo.id, { text: todo.text, completed: !todo.completed })
+  }
 
-  const activeTodos = todos.filter((t) => !t.completed).length;
+  const activeTodos = todos.filter(t => !t.completed).length
 
   if (loading) {
     return (
       <div className="todo-container">
         <p>Loading...</p>
       </div>
-    );
+    )
   }
 
   return (
@@ -41,18 +41,18 @@ export default function TodoList() {
         <input
           type="text"
           value={input}
-          onInput={(e) => setInput((e.target as HTMLInputElement).value)}
-          onKeyPress={(e) => e.key === 'Enter' && addTodo()}
+          onInput={e => setInput((e.target as HTMLInputElement).value)}
+          onKeyPress={e => e.key === 'Enter' && addTodo()}
           placeholder="Add a new todo..."
           className="todo-input"
         />
-        <button className="todo-add-btn" onClick={addTodo}>
+        <button type="button" className="todo-add-btn" onClick={addTodo}>
           Add
         </button>
       </div>
 
       <ul className="todo-list">
-        {todos.map((todo) => (
+        {todos.map(todo => (
           <li key={todo.id} className={`todo-item ${todo.completed ? 'completed' : ''}`}>
             <label className="todo-label">
               <input
@@ -63,7 +63,7 @@ export default function TodoList() {
               />
               <span className={`todo-text ${todo.completed ? 'completed' : ''}`}>{todo.text}</span>
             </label>
-            <button className="todo-delete-btn" onClick={() => remove(todo.id)}>
+            <button type="button" className="todo-delete-btn" onClick={() => remove(todo.id)}>
               ×
             </button>
           </li>
@@ -73,5 +73,5 @@ export default function TodoList() {
         )}
       </ul>
     </div>
-  );
+  )
 }

@@ -1,10 +1,10 @@
-import { useVar } from 'orbitcode';
-import Counter from './Counter';
-import TodoList from './TodoList';
-import './App.css';
+import { useVar } from 'orbitcode'
+import Counter from './Counter'
+import TodoList from './TodoList'
+import './App.css'
 
 export default function App() {
-  const [name, setName] = useVar('name', 'World');
+  const [name, setName] = useVar('name', 'World')
 
   return (
     <div className="app-background">
@@ -12,11 +12,14 @@ export default function App() {
         <h1 className="app-title">Hello {name}! 👋</h1>
 
         <div className="name-input-group">
-          <label className="name-input-label">Your name</label>
+          <label htmlFor="name-input" className="name-input-label">
+            Your name
+          </label>
           <input
+            id="name-input"
             type="text"
             value={name}
-            onInput={(e) => setName((e.target as HTMLInputElement).value)}
+            onInput={e => setName((e.target as HTMLInputElement).value)}
             placeholder="Enter your name"
             className="name-input"
           />
@@ -33,5 +36,5 @@ export default function App() {
         </div>
       </div>
     </div>
-  );
+  )
 }
