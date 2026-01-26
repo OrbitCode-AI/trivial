@@ -1,0 +1,7 @@
+{
+  "name": "Trivial App",
+  "description": "Simple counter and todo list",
+  "icon": "𝌰",
+  "defaultTheme": "light",
+  "defaultLayout": "sidebyside"
+}
