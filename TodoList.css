@@ -97,7 +97,7 @@
 .todo-delete-btn {
   width: 28px;
   height: 28px;
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   background: #ebf8ff;
@@ -108,10 +108,14 @@
   font-weight: 600;
   line-height: 1;
   margin-left: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
 .todo-item:hover .todo-delete-btn {
-  display: flex;
+  opacity: 1;
+  visibility: visible;
 }
 
 .todo-empty {
@@ -418,7 +422,7 @@
 
 /* Destroy button: hidden by default, shown on hover */
 .skin-todomvc .todo-delete-btn {
-  display: none;
+  display: flex;
   position: absolute;
   top: 0;
   right: 10px;
@@ -428,12 +432,14 @@
   margin: auto 0;
   font-size: 30px;
   color: #949494;
-  transition: color 0.2s ease-out;
+  transition: color 0.2s ease-out, opacity 0.2s ease, visibility 0.2s ease;
   cursor: pointer;
   background: transparent;
   border: none;
   border-radius: 0;
   line-height: 1.1;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .skin-todomvc .todo-delete-btn:hover,
@@ -442,7 +448,8 @@
 }
 
 .skin-todomvc .todo-item:hover .todo-delete-btn {
-  display: flex;
+  opacity: 1;
+  visibility: visible;
 }
 
 /* Empty state */
