@@ -92,3 +92,103 @@ button:hover {
 button:active {
   transform: translateY(0);
 }
+
+/* TodoMVC Skin */
+.skin-todomvc {
+  background: #f5f5f5;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.skin-todomvc .app-background {
+  background: #f5f5f5;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 50px;
+}
+
+.skin-todomvc .app-container {
+  max-width: 550px;
+  background: white;
+  border-radius: 0;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
+              0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  padding: 0;
+  margin: 0;
+}
+
+.skin-todomvc .app-title {
+  font-size: 100px;
+  font-weight: 100;
+  text-align: center;
+  color: rgba(175, 47, 47, 0.15);
+  background: none;
+  -webkit-text-fill-color: rgba(175, 47, 47, 0.15);
+  margin: 0;
+  padding: 20px 0 10px 0;
+}
+
+.skin-todomvc .name-input-group {
+  margin-bottom: 0;
+  padding: 0 20px 20px 20px;
+}
+
+.skin-todomvc .name-input-label {
+  color: #777;
+  font-weight: 400;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.skin-todomvc .name-input {
+  padding: 16px 16px 16px 16px;
+  border: 1px solid #ededed;
+  border-radius: 0;
+  font-size: 24px;
+  font-weight: 300;
+  color: #4d4d4d;
+  box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.skin-todomvc .name-input::placeholder {
+  font-style: italic;
+  font-weight: 300;
+  color: #e6e6e6;
+}
+
+.skin-todomvc .info-box {
+  background: white;
+  padding: 20px;
+  border-radius: 0;
+  margin-top: 0;
+  border: none;
+  border-top: 1px solid #e6e6e6;
+  text-align: center;
+}
+
+.skin-todomvc .info-text {
+  font-size: 12px;
+  color: #777;
+  line-height: 1.6;
+}
+
+.skin-todomvc .info-text strong {
+  color: #555;
+  font-weight: 600;
+}
+
+.skin-todomvc input:focus {
+  outline: none;
+  transform: none;
+  box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.skin-todomvc button:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.skin-todomvc button:active {
+  transform: none;
+}

@@ -1,14 +1,18 @@
 import { useVar } from 'orbitcode'
 import Counter from './Counter'
 import TodoList from './TodoList'
+import StyleToggle from './StyleToggle'
 import './App.css'
 
 export default function App() {
   const [name, setName] = useVar('name', 'World')
+  const [skin] = useVar('skin', 'modern')
 
   return (
-    <div className="app-background">
-      <div className="app-container">
+    <div className={`skin-${skin}`}>
+      <StyleToggle />
+      <div className="app-background">
+        <div className="app-container">
         <h1 className="app-title">Hello {name}! 👋</h1>
 
         <div className="name-input-group">
@@ -34,6 +38,7 @@ export default function App() {
             Check the file tree on the left to see all files.
           </p>
         </div>
+      </div>
       </div>
     </div>
   )

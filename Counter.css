@@ -66,3 +66,76 @@
   font-size: 15px;
   font-weight: 600;
 }
+
+/* TodoMVC Skin */
+.skin-todomvc .counter-container {
+  margin: 0;
+  padding: 20px;
+  background: white;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #ededed;
+}
+
+.skin-todomvc .counter-header {
+  font-size: 18px;
+  font-weight: 400;
+  color: #4d4d4d;
+  margin-bottom: 15px;
+}
+
+.skin-todomvc .counter-badge {
+  width: 36px;
+  height: 36px;
+  background: #af5b5e;
+  border-radius: 3px;
+  font-size: 18px;
+  font-weight: 400;
+  box-shadow: none;
+}
+
+.skin-todomvc .counter-buttons {
+  gap: 8px;
+}
+
+.skin-todomvc .counter-btn-primary {
+  padding: 8px 16px;
+  background: #af5b5e;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 400;
+  box-shadow: none;
+}
+
+.skin-todomvc .counter-btn-primary:hover {
+  background: #995052;
+}
+
+.skin-todomvc .counter-btn-outline {
+  padding: 8px 16px;
+  background: white;
+  color: #777;
+  border: 1px solid #ededed;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.skin-todomvc .counter-btn-outline:hover {
+  border-color: #af5b5e;
+  color: #af5b5e;
+}
+
+.skin-todomvc .counter-btn-subtle {
+  padding: 8px 16px;
+  background: white;
+  color: #777;
+  border: 1px solid #ededed;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.skin-todomvc .counter-btn-subtle:hover {
+  border-color: #d9d9d9;
+}
