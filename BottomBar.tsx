@@ -6,6 +6,8 @@ import './BottomBar.css'
 interface BottomBarProps {
   skin?: 'modern' | 'todomvc'
   onToggleSkin?: (skin: 'modern' | 'todomvc') => void
+  name?: string
+  onNameChange?: (name: string) => void
   defaultSkin?: 'modern' | 'todomvc'
   defaultName?: string
 }
@@ -13,14 +15,18 @@ interface BottomBarProps {
 export default function BottomBar({
   skin: skinProp,
   onToggleSkin,
+  name: nameProp,
+  onNameChange,
   defaultSkin = 'modern',
   defaultName = 'World'
 }: BottomBarProps = {}) {
   const [skinState] = useVar('skin', defaultSkin)
-  const [name, setName] = useVar('name', defaultName)
+  const [nameState, setNameState] = useVar('name', defaultName)
 
   // Use prop if provided (controlled mode), otherwise use internal state (standalone mode)
   const skin = skinProp ?? skinState
+  const name = nameProp ?? nameState
+  const setName = onNameChange ?? setNameState
 
   return (
     <div className="bottom-bar">
@@ -30,7 +36,7 @@ export default function BottomBar({
 
       <div className="bottom-bar-section bottom-bar-center">
         <label htmlFor="bottom-name-input" className="bottom-name-label">
-          Hello {name}!
+          Your name
         </label>
         <input
           id="bottom-name-input"
@@ -40,6 +46,9 @@ export default function BottomBar({
           placeholder="Your name"
           className="bottom-name-input"
         />
+        <label className="bottom-name-label">
+          Hello {name}!
+        </label>
       </div>
 
       <div className="bottom-bar-section bottom-bar-right">

@@ -9,7 +9,7 @@ interface AppProps {
 }
 
 export default function App({ defaultName = 'World', defaultSkin = 'modern' }: AppProps = {}) {
-  const [name] = useVar('name', defaultName)
+  const [name, setName] = useVar('name', defaultName)
   const [skin, setSkin] = useVar('skin', defaultSkin)
 
   return (
@@ -26,7 +26,7 @@ export default function App({ defaultName = 'World', defaultSkin = 'modern' }: A
       <footer className="info-footer">
         <p>Double-click to edit a todo</p>
       </footer>
-      <BottomBar skin={skin} onToggleSkin={setSkin} defaultSkin={defaultSkin} defaultName={defaultName} />
+      <BottomBar skin={skin} onToggleSkin={setSkin} name={name} onNameChange={setName} defaultSkin={defaultSkin} defaultName={defaultName} />
     </div>
   )
 }
