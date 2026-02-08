@@ -3,10 +3,35 @@ import './Counter.css'
 
 interface CounterProps {
   defaultCount?: number
+  compact?: boolean
 }
 
-export default function Counter({ defaultCount = 0 }: CounterProps = {}) {
+export default function Counter({ defaultCount = 0, compact = false }: CounterProps = {}) {
   const [count, setCount] = useVar('counter', defaultCount)
+
+  if (compact) {
+    return (
+      <div className="counter-compact">
+        <button
+          type="button"
+          className="counter-compact-btn"
+          onClick={() => setCount(c => c - 1)}
+          aria-label="Decrement"
+        >
+          −
+        </button>
+        <span className="counter-compact-badge">{count}</span>
+        <button
+          type="button"
+          className="counter-compact-btn"
+          onClick={() => setCount(c => c + 1)}
+          aria-label="Increment"
+        >
+          +
+        </button>
+      </div>
+    )
+  }
 
   return (
     <div className="counter-container">
