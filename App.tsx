@@ -11,11 +11,11 @@ interface AppProps {
 
 export default function App({ defaultName = 'World', defaultSkin = 'modern' }: AppProps = {}) {
   const [name, setName] = useVar('name', defaultName)
-  const [skin] = useVar('skin', defaultSkin)
+  const [skin, setSkin] = useVar('skin', defaultSkin)
 
   return (
     <div className={`skin-${skin}`}>
-      <StyleToggle />
+      <StyleToggle skin={skin} onToggle={setSkin} />
       <div className="app-background">
         <div className="app-container">
           <h1 className="todomvc-title">todos</h1>
