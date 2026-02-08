@@ -109,6 +109,7 @@ button:active {
 }
 
 .skin-todomvc .app-container {
+  position: relative;
   max-width: 550px;
   background: white;
   border-radius: 0;
@@ -119,6 +120,10 @@ button:active {
 }
 
 .skin-todomvc .app-title {
+  position: absolute;
+  top: -140px;
+  left: 0;
+  right: 0;
   font-size: 100px;
   font-weight: 100;
   text-align: center;
@@ -126,7 +131,11 @@ button:active {
   background: none;
   -webkit-text-fill-color: rgba(175, 47, 47, 0.15);
   margin: 0;
-  padding: 20px 0 10px 0;
+  padding: 0;
+  line-height: 1;
+  -webkit-text-rendering: optimizeLegibility;
+  -moz-text-rendering: optimizeLegibility;
+  text-rendering: optimizeLegibility;
 }
 
 .skin-todomvc .name-input-group {
@@ -191,4 +200,19 @@ button:active {
 
 .skin-todomvc button:active {
   transform: none;
+}
+
+.info-footer {
+  max-width: 550px;
+  margin: 32px auto 40px;
+  padding: 0 12px 24px;
+  color: #4d4d4d;
+  font-size: 11px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  text-align: center;
+}
+
+.info-footer p {
+  line-height: 1;
+  margin: 0;
 }

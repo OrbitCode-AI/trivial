@@ -1,8 +1,12 @@
 import { useVar } from 'orbitcode'
 import './Counter.css'
 
-export default function Counter() {
-  const [count, setCount] = useVar('counter', 0)
+interface CounterProps {
+  defaultCount?: number
+}
+
+export default function Counter({ defaultCount = 0 }: CounterProps = {}) {
+  const [count, setCount] = useVar('counter', defaultCount)
 
   return (
     <div className="counter-container">

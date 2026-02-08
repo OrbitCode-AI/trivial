@@ -1,8 +1,12 @@
 import { useVar } from 'orbitcode'
 import './StyleToggle.css'
 
-export default function StyleToggle() {
-  const [skin, setSkin] = useVar('skin', 'modern')
+interface StyleToggleProps {
+  defaultSkin?: 'modern' | 'todomvc'
+}
+
+export default function StyleToggle({ defaultSkin = 'modern' }: StyleToggleProps = {}) {
+  const [skin, setSkin] = useVar('skin', defaultSkin)
 
   return (
     <div className="style-toggle">
