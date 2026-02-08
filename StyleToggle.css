@@ -60,4 +60,10 @@
 
 .skin-todomvc .toggle-slider {
   background: #af5b5e;
+  /* Ensure slider has same dimensions as Modern theme */
+  top: 6px;
+  left: 6px;
+  width: calc(50% - 6px);
+  height: calc(100% - 12px);
+  border-radius: 14px;
 }
