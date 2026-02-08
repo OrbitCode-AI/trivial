@@ -18,10 +18,7 @@
 .app-title {
   font-size: 36px;
   font-weight: 700;
-  background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #2d3748;
   margin-bottom: 24px;
 }
 
@@ -33,46 +30,6 @@
 /* Info footer: hidden in modern, visible in todomvc */
 .info-footer {
   display: none;
-}
-
-.name-input-group {
-  margin-bottom: 24px;
-}
-
-.name-input-label {
-  display: block;
-  margin-bottom: 6px;
-  color: #4a5568;
-  font-weight: 500;
-  font-size: 14px;
-}
-
-.name-input {
-  width: 100%;
-  padding: 10px 14px;
-  border: 2px solid #e2e8f0;
-  border-radius: 6px;
-  font-size: 16px;
-  color: #2d3748;
-}
-
-.info-box {
-  background: linear-gradient(135deg, #4299e115 0%, #3182ce15 100%);
-  padding: 16px;
-  border-radius: 8px;
-  margin-top: 24px;
-  border: 2px solid #4299e130;
-}
-
-.info-text {
-  font-size: 14px;
-  color: #4a5568;
-  margin: 0;
-  line-height: 1.6;
-}
-
-.info-text strong {
-  color: #3182ce;
 }
 
 * {
@@ -181,9 +138,6 @@ button:active {
   margin: 0;
 }
 
-.skin-todomvc .app-title {
-  display: none;
-}
 
 .skin-todomvc input:focus {
   outline: none;
