@@ -26,13 +26,19 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
+.toggle-option-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
 .toggle-option {
   font-size: 13px;
   font-weight: 600;
   color: #718096;
   transition: color 0.2s ease;
-  z-index: 2;
-  padding: 4px 12px;
   white-space: nowrap;
 }
 

@@ -22,13 +22,17 @@ export default function StyleToggle({ skin: skinProp, onToggle, defaultSkin = 'm
         onClick={() => setSkin(skin === 'modern' ? 'todomvc' : 'modern')}
         aria-label="Toggle skin"
       >
-        <span className={`toggle-option ${skin === 'modern' ? 'active' : ''}`}>
-          Modern
-        </span>
+        <div className="toggle-option-container">
+          <span className={`toggle-option ${skin === 'modern' ? 'active' : ''}`}>
+            Modern
+          </span>
+        </div>
         <span className={`toggle-slider ${skin === 'todomvc' ? 'right' : ''}`} />
-        <span className={`toggle-option ${skin === 'todomvc' ? 'active' : ''}`}>
-          TodoMVC
-        </span>
+        <div className="toggle-option-container">
+          <span className={`toggle-option ${skin === 'todomvc' ? 'active' : ''}`}>
+            TodoMVC
+          </span>
+        </div>
       </button>
     </div>
   )
