@@ -1,0 +1,84 @@
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 20px;
+  background: white;
+  border-top: 2px solid #4299e1;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.bottom-bar-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bottom-bar-left {
+  flex: 0 0 auto;
+}
+
+.bottom-bar-center {
+  flex: 1;
+  justify-content: center;
+  min-width: 0; /* Allow shrinking */
+}
+
+.bottom-bar-right {
+  flex: 0 0 auto;
+}
+
+.bottom-name-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2d3748;
+  white-space: nowrap;
+}
+
+.bottom-name-input {
+  width: 120px;
+  padding: 6px 10px;
+  border: 2px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #2d3748;
+}
+
+.bottom-name-input:focus {
+  outline: none;
+  border-color: #4299e1;
+}
+
+/* Hide the style toggle from its original fixed position when in bottom bar */
+.bottom-bar .style-toggle {
+  position: static;
+}
+
+/* TodoMVC Skin */
+.skin-todomvc .bottom-bar {
+  background: #f5f5f5;
+  border-top: 1px solid #ededed;
+  box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.skin-todomvc .bottom-name-label {
+  color: #4d4d4d;
+  font-weight: 400;
+}
+
+.skin-todomvc .bottom-name-input {
+  border: 1px solid #ededed;
+  border-radius: 3px;
+  font-size: 14px;
+  color: #4d4d4d;
+}
+
+.skin-todomvc .bottom-name-input:focus {
+  border-color: #af5b5e;
+}
