@@ -99,13 +99,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fee;
-  color: #e53e3e;
+  background: #ebf8ff;
+  color: #3182ce;
   border: none;
   border-radius: 6px;
   font-size: 18px;
   font-weight: 600;
   line-height: 1;
+  margin-left: 8px;
 }
 
 .todo-empty {
@@ -177,11 +178,11 @@
 }
 
 .filters li a:hover {
-  border-color: #db7676;
+  border-color: rgba(66, 153, 225, 0.4);
 }
 
 .filters li a.selected {
-  border-color: #ce4646;
+  border-color: #3182ce;
 }
 
 .clear-completed {
@@ -378,7 +379,7 @@
 /* Label */
 .skin-todomvc .todo-label {
   word-break: break-all;
-  padding: 15px 15px 15px 60px;
+  padding: 15px 60px 15px 60px;
   display: block;
   line-height: 1.2;
   flex: 1;
