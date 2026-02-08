@@ -18,13 +18,9 @@ export default function App({ defaultName = 'World', defaultSkin = 'modern' }: A
       <StyleToggle />
       <div className="app-background">
         <div className="app-container">
-        {skin === 'todomvc' ? (
-          <>
-            <h1 className="app-title">todos</h1>
-            <TodoList />
-          </>
-        ) : (
-          <>
+          <h1 className="todomvc-title">todos</h1>
+
+          <div className="modern-only">
             <h1 className="app-title">Hello {name}! 👋</h1>
 
             <div className="name-input-group">
@@ -42,23 +38,23 @@ export default function App({ defaultName = 'World', defaultSkin = 'modern' }: A
             </div>
 
             <Counter />
-            <TodoList />
+          </div>
 
+          <TodoList />
+
+          <div className="modern-only">
             <div className="info-box">
               <p className="info-text">
                 💡 <strong>Multi-file editing!</strong> Counter and TodoList are in separate files.
                 Check the file tree on the left to see all files.
               </p>
             </div>
-          </>
-        )}
+          </div>
+        </div>
       </div>
-      </div>
-      {skin === 'todomvc' && (
-        <footer className="info-footer">
-          <p>Double-click to edit a todo</p>
-        </footer>
-      )}
+      <footer className="info-footer">
+        <p>Double-click to edit a todo</p>
+      </footer>
     </div>
   )
 }

@@ -13,6 +13,7 @@ export default function TodoList() {
   const [todos, { add, update, remove }, loading] = useSet<Todo>('todos')
   const [input, setInput] = useVar('todoInput', '')
   const [filter, setFilter] = useVar<Filter>('todoFilter', 'all')
+  const [skin] = useVar('skin', 'modern')
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editText, setEditText] = useState('')
   const activeEditIdRef = useRef<string | null>(null)
@@ -105,7 +106,7 @@ export default function TodoList() {
           value={input}
           onInput={e => setInput((e.target as HTMLInputElement).value)}
           onKeyPress={e => e.key === 'Enter' && addTodo()}
-          placeholder="Add a new todo..."
+          placeholder={skin === 'todomvc' ? 'What needs to be done?' : 'Add a new todo...'}
           className="todo-input"
         />
         <button type="button" className="todo-add-btn" onClick={addTodo}>

@@ -199,7 +199,9 @@
   text-decoration: underline;
 }
 
-/* TodoMVC Skin */
+/* ============================================
+   TodoMVC Skin
+   ============================================ */
 .skin-todomvc .todo-container {
   margin: 0;
   padding: 0;
@@ -228,7 +230,9 @@
   border: none;
   border-radius: 0;
   font-size: 24px;
-  font-weight: 300;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: 1.4em;
   color: inherit;
   background: rgba(0, 0, 0, 0.003);
   box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03);
@@ -244,6 +248,7 @@
   display: none;
 }
 
+/* Toggle-all chevron */
 .skin-todomvc .toggle-all-container {
   display: block;
   position: relative;
@@ -286,20 +291,22 @@
   color: #484848;
 }
 
+/* Todo list */
 .skin-todomvc .todo-list {
   gap: 0;
   border-top: 1px solid #e6e6e6;
 }
 
+/* Todo items */
 .skin-todomvc .todo-item {
+  position: relative;
+  list-style: none;
+  font-size: 24px;
   padding: 0;
   background: white;
   border-radius: 0;
   border: none;
   border-bottom: 1px solid #ededed;
-  position: relative;
-  list-style: none;
-  font-size: 24px;
 }
 
 .skin-todomvc .todo-item:last-child {
@@ -333,22 +340,17 @@
   color: inherit;
 }
 
+.skin-todomvc .todo-item.editing:last-child {
+  margin-bottom: -1px;
+}
+
 .skin-todomvc .view {
   display: flex;
   align-items: center;
   position: relative;
 }
 
-.skin-todomvc .todo-label {
-  word-break: break-all;
-  padding: 15px 15px 15px 60px;
-  display: block;
-  line-height: 1.2;
-  flex: 1;
-  cursor: pointer;
-  transition: color 0.4s;
-}
-
+/* Checkbox: hidden native, SVG circle via background-image on label */
 .skin-todomvc .todo-checkbox {
   text-align: center;
   width: 40px;
@@ -356,7 +358,6 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 0;
   margin: auto 0;
   border: none;
   appearance: none;
@@ -374,6 +375,20 @@
   background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%2359A193%22%20stroke-width%3D%223%22%2F%3E%3Cpath%20fill%3D%22%233EA390%22%20d%3D%22M72%2025L42%2071%2027%2056l-4%204%2020%2020%2034-52z%22%2F%3E%3C%2Fsvg%3E');
 }
 
+/* Label */
+.skin-todomvc .todo-label {
+  word-break: break-all;
+  padding: 15px 15px 15px 60px;
+  display: block;
+  line-height: 1.2;
+  flex: 1;
+  cursor: pointer;
+  transition: color 0.4s;
+  font-weight: 400;
+  color: #484848;
+}
+
+/* Text */
 .skin-todomvc .todo-text {
   font-size: inherit;
   font-weight: 400;
@@ -388,6 +403,12 @@
   text-decoration: line-through;
 }
 
+.skin-todomvc .todo-item.completed .todo-label {
+  color: #949494;
+  text-decoration: line-through;
+}
+
+/* Destroy button: hidden by default, shown on hover */
 .skin-todomvc .todo-delete-btn {
   display: none;
   position: absolute;
@@ -413,9 +434,10 @@
 }
 
 .skin-todomvc .todo-item:hover .todo-delete-btn {
-  display: block;
+  display: flex;
 }
 
+/* Empty state */
 .skin-todomvc .todo-empty {
   padding: 40px;
   text-align: center;
@@ -425,6 +447,7 @@
   border: none;
 }
 
+/* Footer with stacked-paper shadow effect */
 .skin-todomvc .footer {
   position: relative;
   display: flex;
