@@ -1,4 +1,4 @@
-import { useVar, useSet } from 'orbitcode'
+import { useList, useVar } from 'orbitcode'
 import { useState, useRef } from 'preact/hooks'
 import './TodoList.css'
 
@@ -10,7 +10,7 @@ interface Todo {
 type Filter = 'all' | 'active' | 'completed'
 
 export default function TodoList() {
-  const [todos, { add, update, remove }, loading] = useSet<Todo>('todos')
+  const [todos, { add, update, remove }, loading] = useList<Todo>('todos')
   const [input, setInput] = useVar('todoInput', '')
   const [filter, setFilter] = useVar<Filter>('todoFilter', 'all')
   const [skin] = useVar('skin', 'modern')
