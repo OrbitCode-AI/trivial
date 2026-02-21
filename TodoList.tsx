@@ -174,7 +174,6 @@ export default function TodoList() {
                         cancelEdit()
                       }
                     }}
-                    autoFocus
                   />
                 )}
               </li>
