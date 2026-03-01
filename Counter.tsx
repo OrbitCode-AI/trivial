@@ -16,8 +16,7 @@ export default function Counter({ defaultCount = 0, compact = false }: CounterPr
           type="button"
           className="counter-compact-btn"
           onClick={() => setCount(c => c - 1)}
-          aria-label="Decrement"
-        >
+          aria-label="Decrement">
           −
         </button>
         <span className="counter-compact-badge">{count}</span>
@@ -25,8 +24,7 @@ export default function Counter({ defaultCount = 0, compact = false }: CounterPr
           type="button"
           className="counter-compact-btn"
           onClick={() => setCount(c => c + 1)}
-          aria-label="Increment"
-        >
+          aria-label="Increment">
           +
         </button>
       </div>

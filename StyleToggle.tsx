@@ -7,7 +7,11 @@ interface StyleToggleProps {
   defaultSkin?: 'modern' | 'todomvc'
 }
 
-export default function StyleToggle({ skin: skinProp, onToggle, defaultSkin = 'modern' }: StyleToggleProps = {}) {
+export default function StyleToggle({
+  skin: skinProp,
+  onToggle,
+  defaultSkin = 'modern',
+}: StyleToggleProps = {}) {
   const [skinState, setSkinState] = useVar('skin', defaultSkin)
 
   // Use prop if provided (controlled mode), otherwise use internal state (standalone mode)
@@ -20,18 +24,13 @@ export default function StyleToggle({ skin: skinProp, onToggle, defaultSkin = 'm
         type="button"
         className="toggle-button"
         onClick={() => setSkin(skin === 'modern' ? 'todomvc' : 'modern')}
-        aria-label="Toggle skin"
-      >
+        aria-label="Toggle skin">
         <div className="toggle-option-container">
-          <span className={`toggle-option ${skin === 'modern' ? 'active' : ''}`}>
-            Modern
-          </span>
+          <span className={`toggle-option ${skin === 'modern' ? 'active' : ''}`}>Modern</span>
         </div>
         <span className={`toggle-slider ${skin === 'todomvc' ? 'right' : ''}`} />
         <div className="toggle-option-container">
-          <span className={`toggle-option ${skin === 'todomvc' ? 'active' : ''}`}>
-            TodoMVC
-          </span>
+          <span className={`toggle-option ${skin === 'todomvc' ? 'active' : ''}`}>TodoMVC</span>
         </div>
       </button>
     </div>

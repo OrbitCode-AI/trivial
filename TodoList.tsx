@@ -133,8 +133,7 @@ export default function TodoList() {
                 key={todo.id}
                 className={`todo-item ${todo.completed ? 'completed' : ''} ${
                   editingId === todo.id ? 'editing' : ''
-                }`}
-              >
+                }`}>
                 <div className="view">
                   <input
                     type="checkbox"
@@ -142,10 +141,7 @@ export default function TodoList() {
                     onChange={() => toggleTodo(todo)}
                     className="todo-checkbox"
                   />
-                  <label
-                    className="todo-label"
-                    onDblClick={() => startEditing(todo)}
-                  >
+                  <label className="todo-label" onDblClick={() => startEditing(todo)}>
                     <span className={`todo-text ${todo.completed ? 'completed' : ''}`}>
                       {todo.text}
                     </span>
@@ -154,8 +150,7 @@ export default function TodoList() {
                     type="button"
                     className="todo-delete-btn"
                     onClick={() => remove(todo.id)}
-                    aria-label="Delete todo"
-                  >
+                    aria-label="Delete todo">
                     ×
                   </button>
                 </div>
@@ -193,8 +188,7 @@ export default function TodoList() {
                   onClick={e => {
                     e.preventDefault()
                     setFilter('all')
-                  }}
-                >
+                  }}>
                   All
                 </a>
               </li>
@@ -205,8 +199,7 @@ export default function TodoList() {
                   onClick={e => {
                     e.preventDefault()
                     setFilter('active')
-                  }}
-                >
+                  }}>
                   Active
                 </a>
               </li>
@@ -217,8 +210,7 @@ export default function TodoList() {
                   onClick={e => {
                     e.preventDefault()
                     setFilter('completed')
-                  }}
-                >
+                  }}>
                   Completed
                 </a>
               </li>

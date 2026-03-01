@@ -18,7 +18,7 @@ export default function BottomBar({
   name: nameProp,
   onNameChange,
   defaultSkin = 'modern',
-  defaultName = 'World'
+  defaultName = 'World',
 }: BottomBarProps = {}) {
   const [skinState] = useVar('skin', defaultSkin)
   const [nameState, setNameState] = useVar('name', defaultName)
@@ -46,9 +46,7 @@ export default function BottomBar({
           placeholder="Your name"
           className="bottom-name-input"
         />
-        <label className="bottom-name-label">
-          Hello {name}!
-        </label>
+        <label className="bottom-name-label">Hello {name}!</label>
       </div>
 
       <div className="bottom-bar-section bottom-bar-right">
