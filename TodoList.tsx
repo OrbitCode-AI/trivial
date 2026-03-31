@@ -1,4 +1,4 @@
-import { useList, useVar } from 'orbitcode'
+import { useMap, useVar } from 'orbitcode'
 import { useState, useRef } from 'preact/hooks'
 import './TodoList.css'
 
@@ -10,64 +10,70 @@ interface Todo {
 type Filter = 'all' | 'active' | 'completed'
 
 export default function TodoList() {
-  const [todos, actions, loading] = useList<Todo>('todos')
+  const [todosMap, actions, loading] = useMap<Todo>('todos')
   const [input, setInput] = useVar('todoInput', '')
   const [filter, setFilter] = useVar<Filter>('todoFilter', 'all')
   const [skin] = useVar('skin', 'modern')
-  const [editingIndex, setEditingIndex] = useState<number | null>(null)
+  const [editingId, setEditingId] = useState<string | null>(null)
   const [editText, setEditText] = useState('')
-  const activeEditRef = useRef<number | null>(null)
+  const activeEditRef = useRef<string | null>(null)
+
+  const entries = Object.entries(todosMap)
+  const todos = entries.map(([id, todo]) => ({ id, ...todo }))
 
   const addTodo = async () => {
     if (!input.trim()) return
-    await actions.push({ text: input, completed: false })
+    await actions.set(Date.now().toString(), { text: input, completed: false })
     setInput('')
   }
 
   const toggleAll = () => {
     const allCompleted = todos.length > 0 && todos.every(t => t.completed)
-    actions.set(
-      todos.map(todo => ({
-        text: todo.text,
-        completed: !allCompleted,
-      })),
-    )
+    for (const todo of todos) {
+      actions.set(todo.id, { text: todo.text, completed: !allCompleted })
+    }
   }
 
-  const startEditing = (index: number) => {
-    activeEditRef.current = index
-    setEditingIndex(index)
-    setEditText(todos[index].text)
+  const startEditing = (id: string) => {
+    const todo = todosMap[id]
+    if (!todo) return
+    activeEditRef.current = id
+    setEditingId(id)
+    setEditText(todo.text)
   }
 
-  const submitEdit = (index: number) => {
-    if (activeEditRef.current !== index) return
+  const submitEdit = (id: string) => {
+    if (activeEditRef.current !== id) return
 
-    const todo = todos[index]
+    const todo = todosMap[id]
     const nextText = editText.trim()
 
     activeEditRef.current = null
-    setEditingIndex(null)
+    setEditingId(null)
     setEditText('')
 
     if (!todo) return
     if (!nextText) {
-      actions.removeAt(index)
+      actions.remove(id)
       return
     }
     if (nextText !== todo.text) {
-      actions.updateAt(index, { text: nextText, completed: todo.completed })
+      actions.set(id, { text: nextText, completed: todo.completed })
     }
   }
 
   const cancelEdit = () => {
     activeEditRef.current = null
-    setEditingIndex(null)
+    setEditingId(null)
     setEditText('')
   }
 
   const clearCompleted = () => {
-    actions.set(todos.filter(t => !t.completed).map(({ text, completed }) => ({ text, completed })))
+    for (const todo of todos) {
+      if (todo.completed) {
+        actions.remove(todo.id)
+      }
+    }
   }
 
   const activeTodos = todos.filter(t => !t.completed).length
@@ -123,56 +129,51 @@ export default function TodoList() {
           </div>
 
           <ul className="todo-list">
-            {filteredTodos.map(todo => {
-              const index = todos.indexOf(todo)
-              return (
-                <li
-                  key={index}
-                  className={`todo-item ${todo.completed ? 'completed' : ''} ${
-                    editingIndex === index ? 'editing' : ''
-                  }`}>
-                  <div className="view">
-                    <input
-                      type="checkbox"
-                      checked={todo.completed}
-                      onChange={() =>
-                        actions.updateAt(index, { text: todo.text, completed: !todo.completed })
+            {filteredTodos.map(todo => (
+              <li
+                key={todo.id}
+                className={`todo-item ${todo.completed ? 'completed' : ''} ${
+                  editingId === todo.id ? 'editing' : ''
+                }`}>
+                <div className="view">
+                  <input
+                    type="checkbox"
+                    checked={todo.completed}
+                    onChange={() => actions.set(todo.id, { text: todo.text, completed: !todo.completed })}
+                    className="todo-checkbox"
+                  />
+                  <label className="todo-label" onDblClick={() => startEditing(todo.id)}>
+                    <span className={`todo-text ${todo.completed ? 'completed' : ''}`}>
+                      {todo.text}
+                    </span>
+                  </label>
+                  <button
+                    type="button"
+                    className="todo-delete-btn"
+                    onClick={() => actions.remove(todo.id)}
+                    aria-label="Delete todo">
+                    ×
+                  </button>
+                </div>
+                {editingId === todo.id && (
+                  <input
+                    className="edit"
+                    value={editText}
+                    onInput={e => setEditText((e.target as HTMLInputElement).value)}
+                    onBlur={() => submitEdit(todo.id)}
+                    onKeyDown={e => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault()
+                        submitEdit(todo.id)
+                      } else if (e.key === 'Escape') {
+                        e.preventDefault()
+                        cancelEdit()
                       }
-                      className="todo-checkbox"
-                    />
-                    <label className="todo-label" onDblClick={() => startEditing(index)}>
-                      <span className={`todo-text ${todo.completed ? 'completed' : ''}`}>
-                        {todo.text}
-                      </span>
-                    </label>
-                    <button
-                      type="button"
-                      className="todo-delete-btn"
-                      onClick={() => actions.removeAt(index)}
-                      aria-label="Delete todo">
-                      ×
-                    </button>
-                  </div>
-                  {editingIndex === index && (
-                    <input
-                      className="edit"
-                      value={editText}
-                      onInput={e => setEditText((e.target as HTMLInputElement).value)}
-                      onBlur={() => submitEdit(index)}
-                      onKeyDown={e => {
-                        if (e.key === 'Enter') {
-                          e.preventDefault()
-                          submitEdit(index)
-                        } else if (e.key === 'Escape') {
-                          e.preventDefault()
-                          cancelEdit()
-                        }
-                      }}
-                    />
-                  )}
-                </li>
-              )
-            })}
+                    }}
+                  />
+                )}
+              </li>
+            ))}
           </ul>
 
           <footer className="footer">
